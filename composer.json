@@ -1,0 +1,29 @@
+{
+    "name" : "rulecom/api-wrapper",
+    "description" : "Api wrapper for the RULE mailer.",
+    "version" : "1.0.0-b",
+    "authors" : [
+        {
+            "name" : "Stanislav Kalashnik",
+            "email" : "stanislav.kalashnik@rule.se",
+            "homepage" : "https://github.com/athe0i",
+            "role" : "Developer"
+        }
+    ],
+
+    "support" : {
+        "email" : "stanislav.kalashnik@rule.se"
+    },
+
+    "autoload" : {
+        "psr-4": {
+            "Rule\\ApiWrapper\\": "src"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.5"
+    }
+}
