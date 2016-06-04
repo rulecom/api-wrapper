@@ -6,6 +6,7 @@ class Request
     private $idParam;
     private $params;
     private $resource;
+    private $subresource;
     private $method;
 
     public function __construct($resource)
@@ -53,6 +54,16 @@ class Request
         return $this->resource;
     }
 
+    public function setSubresource(string $subresource)
+    {
+        $this->subresource = $subresource;
+    }
+
+    public function getSubresource()
+    {
+        return $this->subresource;
+    }
+
     public function setMethod(string $method)
     {
         $this->method = $method;
@@ -71,6 +82,14 @@ class Request
      */
     public function getRelativeUrl()
     {
-        return $this->idParam ? "/$resource/$idParam" : "/$resource";
+        $url = "/{$this->resource}";
+
+        if ($this->idParam)
+            $url = $url . "/{$this->idParam}";
+
+        if ($this->subresource)
+            $url = $url . "/$this->subresource";
+
+        return $url;
     }
 }
