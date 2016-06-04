@@ -30,12 +30,32 @@ class Client extends AbstractClient
         ]);
     }
 
-    public function get($request)
+    public function get(Request $request)
     {
-        $request->setMethod('GET');
+        return $this->sendRequest('GET', $request);
+    }
+
+    public function post(Request $request)
+    {
+        return $this->sendRequest('POST', $request);
+    }
+
+    public function put(Request $request)
+    {
+        return $this->sendRequest('PUT', $request);
+    }
+
+    public function delete(Request $request)
+    {
+        return $this->sendRequest('DELETE', $request);
+    }
+
+    private function sendRequest($method, Request $request)
+    {
+        $request->setMethod($method);
         $response = $this->guzzleClient()->send(
             RequestFactory::make($request),
-            ['query' => $request->getQuery()]
+            $this->getRequestOptions($request);
         );
 
         return ResponseFactory::make($response);
@@ -43,9 +63,14 @@ class Client extends AbstractClient
 
     private function getRequestOptions(Request $request)
     {
-        return [
-                'query' => $request->getQuery(),
-                'json' => $request->getParams()
-        ];
+        $options = [];
+
+        if ($request->getQuery())
+            $options['query'] = $request->getQuery();
+
+        if ($request->getParams())
+            $options['json'] = $request->getParams();
+
+        return $options;
     }
 }
