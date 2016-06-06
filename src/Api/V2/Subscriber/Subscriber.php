@@ -8,13 +8,30 @@ use \InvalidArgumentException;
 
 class Subscriber
 {
+    /**
+     * @var Client
+     */
     private $client;
 
+    /**
+     * Subscriber constructor. Creates new Subscriber instance
+     *
+     * @param Client $client
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
+    /**
+     * Creates new subscriber
+     *
+     * @link https://rule.se/apidoc/#subscribers-create-new-subscriber-post
+     *
+     * @param array $subscriber
+     * @return array
+     * @throws \Exception
+     */
     public function create(array $subscriber)
     {
         $defaults = ['language' => 'sv', 'update_on_duplicate' => true, 'tags' => []];
@@ -39,6 +56,15 @@ class Subscriber
         return $response->getData();
     }
 
+    /**
+     * Create new subscribers
+     *
+     * @link https://rule.se/apidoc/#subscribers-create-new-subscriber-post
+     *
+     * @param array $subscribers
+     * @return array
+     * @throws \Exception
+     */
     public function createMultiple(array $subscribers)
     {
         $defaults = ['language' => 'sv', 'update_on_duplicate' => true, 'tags' => []];
@@ -68,6 +94,15 @@ class Subscriber
         return $response->getData();
     }
 
+    /**
+     * Returns subscribers list
+     *
+     * @link https://rule.se/apidoc/#subscribers-get-subscribers-get
+     *
+     * @param int $limit
+     * @return array
+     * @throws \Exception
+     */
     public function getSubscribersList($limit = 100)
     {
         $request = new Request('subscribers');
@@ -80,6 +115,16 @@ class Subscriber
         return $response->getData();
     }
 
+    /**
+     * Returns single subscriber
+     *
+     * @link https://rule.se/apidoc/#subscribers-get-subscriber-get
+     *
+     * @param $id
+     * @param string $identifyBy
+     * @return array
+     * @throws \Exception
+     */
     public function getSubscriber($id, $identifyBy = 'email')
     {
         $request = new Request('subscribers');
@@ -93,6 +138,16 @@ class Subscriber
         return $response->getData();
     }
 
+    /**
+     * Returns subscriber fields
+     *
+     * @link https://rule.se/apidoc/#subscribers-get-subscriber-fields-get
+     *
+     * @param $id
+     * @param string $identifyBy
+     * @return array
+     * @throws \Exception
+     */
     public function getSubscriberFields($id, $identifyBy = "email")
     {
         $request = new Request('subscribers');
@@ -108,6 +163,17 @@ class Subscriber
     }
 
     // TODO: look rule implementation
+    /**
+     * Updates subscriber
+     *
+     * @link https://rule.se/apidoc/#subscribers-update-subscriber-put
+     *
+     * @param $id
+     * @param $subscriber
+     * @return array
+     * @throws Exception
+     * @throws \Exception
+     */
     public function updateSubscriber($id, $subscriber)
     {
         if (!$id) {
@@ -127,6 +193,17 @@ class Subscriber
         return $response->getData();
     }
 
+    /**
+     * Adds tags to subscriber
+     *
+     * @link https://rule.se/apidoc/#subscribers-tags-post
+     *
+     * @param $id
+     * @param array $tags
+     * @param string $identifyBy
+     * @return array
+     * @throws \Exception
+     */
     public function addSubscriberTags($id, array $tags, $identifyBy = 'email')
     {
         $request = new Request('subscribers');
@@ -143,6 +220,16 @@ class Subscriber
 
     }
 
+    /**
+     * Returns subscriber tags
+     *
+     * @link https://rule.se/apidoc/#subscribers-tags-get
+     *
+     * @param $id
+     * @param string $identifyBy
+     * @return array
+     * @throws \Exception
+     */
     public function getSubscriberTags($id, $identifyBy = "email")
     {
         $request = new Request('subscribers');
@@ -157,6 +244,17 @@ class Subscriber
         return $response->getData();
     }
 
+    /**
+     * Removes subscriber tags
+     *
+     * @link https://rule.se/apidoc/#subscribers-delete-subscriber-tag-delete
+     *
+     * @param $id
+     * @param $tag
+     * @param string $identifyBy
+     * @return array
+     * @throws \Exception
+     */
     public function deleteSubscriberTags($id, $tag, $identifyBy = "email")
     {
         $request = new Request('subscribers');

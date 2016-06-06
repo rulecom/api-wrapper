@@ -11,7 +11,7 @@ abstract class Client
     private $baseUrl;
 
     /**
-     * @var string 
+     * @var string
      * Api key for the RULE account.
      */
     private $apiKey;
@@ -39,6 +39,7 @@ abstract class Client
 
     /**
      * Get Rule api key
+     * 
      * @return string
      */
     public function getApiKey()
@@ -48,6 +49,7 @@ abstract class Client
 
     /**
      * Get Rule api version
+     * 
      * @return string
      */
     public function getVersion()
