@@ -2,78 +2,171 @@
 
 class Request
 {
+    /**
+     * @var array
+     */
     private $query;
+    
+    /**
+     * @var mixed
+     */
     private $idParam;
+
+    /**
+     * @var array
+     */
     private $params;
+
+    /**
+     * @var string
+     */
     private $resource;
+
+    /**
+     * @var array
+     */
     private $subresources;
+
+    /**
+     * @var string
+     */
     private $method;
 
+    /**
+     * Request constructor. Create new Request instance
+     * 
+     * @param $resource
+     */
     public function __construct($resource)
     {
         $this->resource = $resource;
     }
 
+    /**
+     * Sets request query
+     *
+     * @param array $query
+     */
     public function setQuery(array $query)
     {
         $this->query = $query;
     }
 
+    /**
+     * Returns request query
+     *
+     * @return mixed
+     */
     public function getQuery()
     {
         return $this->query;
     }
 
+    /**
+     * Sets id parameter to Request
+     *
+     * @param array $idParam
+     */
     public function setIdParam(array $idParam)
     {
         $this->idParam = $idParam;
     }
 
+    /**
+     * Returns request id parameter
+     *
+     * @return mixed
+     */
     public function getIdParam()
     {
         return $this->idParam;
     }
 
+    /**
+     * Sets request parameters
+     *
+     * @param array $params
+     */
     public function setParams(array $params)
     {
         $this->params = $params;
     }
 
+    /**
+     * Returns request parameters
+     *
+     * @return mixed
+     */
     public function getParams()
     {
         return $this->params;
     }
 
+    /**
+     * Sets request resource
+     *
+     * @param string $resource
+     */
     public function setResource(string $resource)
     {
         $this->resource = $resource;
     }
 
+    /**
+     * Returns request resource
+     *
+     * @return mixed
+     */
     public function getResource()
     {
         return $this->resource;
     }
 
+    /**
+     * Sets request subresources
+     *
+     * @param array $subresources
+     */
     public function setSubresources(array $subresources)
     {
         $this->subresources = $subresources;
     }
 
+    /**
+     * Returns request subresources
+     *
+     * @return mixed
+     */
     public function getSubresources()
     {
         return $this->subresources;
     }
 
+    /**
+     * Adds subresources to request
+     *
+     * @param array $subresource
+     */
     public function addSubresource(array $subresource)
     {
         $this->subresources[] = $subresource;
     }
 
+    /**
+     * Set request method
+     *
+     * @param string $method
+     */
     public function setMethod(string $method)
     {
         $this->method = $method;
     }
 
+    /**
+     * Returns request method
+     * 
+     * @return mixed
+     */
     public function getMethod()
     {
         return $this->method;
@@ -100,6 +193,13 @@ class Request
         return $url;
     }
 
+    /**
+     * Returns resource URL
+     * 
+     * @param $name
+     * @param null $id
+     * @return string
+     */
     private function getResourceUrl($name, $id = null) {
         $url = "/{$name}";
 
