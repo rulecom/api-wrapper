@@ -43,10 +43,10 @@ class Subscriber
     {
         $defaults = ['language' => 'sv', 'update_on_duplicate' => true, 'tags' => []];
 
-        $subscriber = array_merge($defaults, $subscriber);
+        $subscribers = array_merge($defaults, $subscribers);
 
         foreach ($subscribers['subscribers'] as $subscriber) {
-            $this->assertValidSubscriberParams($subscribers);
+            $this->assertValidSubscriberParams($subscriber);
         }
 
         $params = [
