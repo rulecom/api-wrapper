@@ -1,3 +1,5 @@
+<?php namespace Rule\ApiWrapper\Api\V2\Campaign;
+
 use Rule\ApiWrapper\Client\Response;
 
 use \InvalidArgumentException;
