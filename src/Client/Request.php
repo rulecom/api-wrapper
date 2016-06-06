@@ -6,7 +6,7 @@ class Request
     private $idParam;
     private $params;
     private $resource;
-    private $subresource;
+    private $subresources;
     private $method;
 
     public function __construct($resource)
@@ -54,14 +54,19 @@ class Request
         return $this->resource;
     }
 
-    public function setSubresource(string $subresource)
+    public function setSubresources(array $subresources)
     {
-        $this->subresource = $subresource;
+        $this->subresources = $subresources;
     }
 
-    public function getSubresource()
+    public function getSubresources()
     {
-        return $this->subresource;
+        return $this->subresources;
+    }
+
+    public function addSubresource(array $subresource)
+    {
+        $this->subresources[] = $subresource;
     }
 
     public function setMethod(string $method)
@@ -82,13 +87,24 @@ class Request
      */
     public function getRelativeUrl()
     {
-        $url = "/{$this->resource}";
+        $url = $this->getResourceUrl($this->resource, $this->idParam);
 
-        if ($this->idParam)
-            $url = $url . "/{$this->idParam}";
+        if (count($this->subresources)) {
+            foreach($this->subresources as $subresource) {
+                if ($subresource['name']) {
+                    $url .= $this->getResourceUrl($subresource['name'], $subresource['id']);
+                }
+            }
+        }
 
-        if ($this->subresource)
-            $url = $url . "/$this->subresource";
+        return $url;
+    }
+
+    private function getResourceUrl($name, $id = null) {
+        $url = "/{$name}";
+
+        if ($id)
+            $url .= "/{$id}";
 
         return $url;
     }

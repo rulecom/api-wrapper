@@ -130,7 +130,7 @@ class Subscriber
         $request = new Request('subscribers');
         $request->setQuery(['identified_by' => $identifyBy]);
         $request->setIdParam($id);
-        $request->setSubresource('tags');
+        $request->addSubresource(['name' => 'tags']);
 
         $response = $this->client->get($request);
 
