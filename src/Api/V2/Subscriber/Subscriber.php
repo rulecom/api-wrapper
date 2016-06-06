@@ -55,7 +55,7 @@ class Subscriber
         ];
 
         $params['subscribers'] = array_map(function($subscriber){
-                return $this->getSubscriberParams($subscriber)
+                return $this->getSubscriberParams($subscriber);
             }, $subscribers['subscribers']);
 
         $request = new Request('subscribers');
