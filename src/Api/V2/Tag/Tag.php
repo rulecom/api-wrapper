@@ -6,7 +6,7 @@ use Rule\ApiWrapper\Client\Response;
 
 use \InvalidArgumentException;
 
-class Subscriber
+class Tag
 {
     private $client;
 
