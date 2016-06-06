@@ -6,13 +6,28 @@ use \InvalidArgumentException;
 
 class Campaign
 {
+    /**
+     * @var Client
+     */
     private $client;
 
+    /**
+     * Campaign constructor.
+     *
+     * @param Client $client
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
+    /**
+     * Get campaigns
+     *
+     * @param integer $limit Limit for the campaigns count, default 100 max 100
+     * @return array Request result
+     * @throws \Exception 
+     */
     public function list($limit = 100)
     {
         $request = new Request('campaigns');
@@ -25,6 +40,13 @@ class Campaign
         return $response->getData();
     }
 
+    /**
+     * Get campaign data.
+     *
+     * @param integer $id Id of the campaign.
+     * @return array Request result
+     * @throws \Exception
+     */
     public function get($id)
     {
         $request = new Request('campaigns');
@@ -37,6 +59,13 @@ class Campaign
         return $response->getData();
     }
 
+    /**
+     * Get campaign statistics.
+     *
+     * @param integer $id Id of the campaign.
+     * @return array Request result
+     * @throws \Exception
+     */
     public function statistics($id)
     {
         $request = new Request('campaigns');
@@ -49,6 +78,13 @@ class Campaign
         return $response->getData();
     }
 
+    /**
+     * Send campaign.
+     *
+     * @param array $campaign Campaign data formated according {@link https://rule.se/apidoc/#campaigns-send-campaign-post}
+     * @return array
+     * @throws \Exception, InvalidArgumentException
+     */
     public function send(array $campaign)
     {
         $this->assertValidCampaign($campaign);
@@ -64,6 +100,13 @@ class Campaign
         return $response->getData();
     }
 
+    /**
+     * Schedule campaign.
+     *
+     * @param array $campaign Campaign data formated according {@link https://rule.se/apidoc/#campaigns-send-campaign-post}
+     * @return array
+     * @throws \Exception, InvalidArgumentException
+     */
     public function schedule(array $campaign)
     {
         $this->assertValidCampaign($campaign);
@@ -80,6 +123,12 @@ class Campaign
         return $response->getData();
     }
 
+    /**
+     * Check if campaign is correctly formated
+     *
+     * @param array $campaign Campaign to validate
+     * @throws InvalidArgumentException
+     */
     private function assertValidCampaign(array $campaign)
     {
         if (!isset($campaign['subject'])) {
@@ -104,6 +153,12 @@ class Campaign
         }
     }
 
+    /**
+     * Check if campaign is scheduled
+     *
+     * @param array $campaign Campaign to validate
+     * @throws InvalidArgumentException
+     */
     private function assertScheduledCampaign(array $campaign)
     {
         if (!isset($campaign['send_at'])) {

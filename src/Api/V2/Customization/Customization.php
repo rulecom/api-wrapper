@@ -8,13 +8,28 @@ use \InvalidArgumentException;
 
 class Customization
 {
+    /**
+     * @var client
+     */
     private $client;
 
+    /**
+     * Customization constructor
+     *
+     * @param Client $client 
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
+    /**
+     * Create fields.
+     * 
+     * @param array $fields Array of fields {@link https://rule.se/apidoc/#subscriber-fields-create-groups-and-fields-post}
+     * @return array Response result
+     * @throws \Exception
+     */
     public function create(array $fields)
     {
         $this->assertValidFields($fields);
@@ -27,10 +42,15 @@ class Customization
         $this->assertSuccessResponse($response);
 
         return $response->getData();
-
     }
 
-    public function getGroups($limit = 100)
+    /**
+     * Get groups.
+     * 
+     * @param integer $limit Limit of the results count
+     * @return array Request result
+     */
+    public function list($limit = 100)
     {
         $request = new Request('customizations');
         $request->setQuery(['limit' =>$limit]);
@@ -42,7 +62,14 @@ class Customization
         return $response->getData();
     }
 
-    public function getGroup($id)
+    /**
+     * Get group fields
+     *
+     * @param integer $id Id of the group
+     * @return array Request result
+     * @throws \Exception
+     */
+    public function get($id)
     {
         $request = new Request('customizations');
         $request->setIdParam(urlencode($id));
@@ -54,6 +81,11 @@ class Customization
         return $response->getData();
     }
 
+    /**
+     * Check if fields are valid
+     * @param array $fields 
+     * @throws InvalidArgumentException
+     */
     private function assertValidFields($fields)
     {
         if(!isset($fields)) {
