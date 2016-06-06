@@ -55,7 +55,7 @@ class Client extends AbstractClient
         $request->setMethod($method);
         $response = $this->guzzleClient()->send(
             RequestFactory::make($request),
-            $this->getRequestOptions($request);
+            $this->getRequestOptions($request)
         );
 
         return ResponseFactory::make($response);

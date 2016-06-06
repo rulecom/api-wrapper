@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 
 class RequestFactory
 {
-    public static make(Client $client, RuleRequest $request)
+    public static function make(Client $client, RuleRequest $request)
     {
         return new Request($request->getMethod(), $request->getRelativeUrl());
     }

@@ -71,7 +71,7 @@ abstract class Client
      * 
      * @return Response
      */
-    public function get(Request $request);
+    abstract public function get(Request $request);
 
     /**
      * Make post request to api
@@ -80,7 +80,7 @@ abstract class Client
      * 
      * @return Response
      */
-    public function post(Request $request);
+    abstract public function post(Request $request);
 
     /**
      * Make put request to api
@@ -89,7 +89,7 @@ abstract class Client
      * 
      * @return Response
      */
-    public function put(Request $request);
+    abstract public function put(Request $request);
 
     /**
      * Make delete request to api
@@ -98,5 +98,5 @@ abstract class Client
      * 
      * @return Response
      */
-    public function delete(Request $request);
+    abstract public function delete(Request $request);
 }
