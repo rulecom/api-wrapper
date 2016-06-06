@@ -110,8 +110,15 @@ class Subscriber
     // TODO: look rule implementation
     public function updateSubscriber($id, $subscriber)
     {
+        if (!$id) {
+            throw new Exception('Subscriber id should be providen');
+        }
+
+        $this->assertValidSubscriberParams($subscriber);
+
         $request = new Request('subscribers');
         $request->setIdParam($id);
+        $request->setParams($this->getSubscriberParams($subscriber));
 
         $response = $this->client->put($request);
 
@@ -120,9 +127,20 @@ class Subscriber
         return $response->getData();
     }
 
-    public function addSubscriberTag($id, $identifyBy = 'email')
+    public function addSubscriberTags($id, array $tags, $identifyBy = 'email')
     {
-        
+        $request = new Request('subscribers');
+        $request->setQuery(['identified_by' => $identifyBy]);
+        $request->setIdParam($id);
+        $request->addSubresource(['name' => 'tags']);
+        $request->setParams(['tags' => $tags]);
+
+        $response = $this->client->post($request);
+
+        $this->assertSuccessResponse($response);
+
+        return $response->getData();
+
     }
 
     public function getSubscriberTags($id, $identifyBy = "email")
@@ -137,6 +155,21 @@ class Subscriber
         $this->assertSuccessResponse($response);
 
         return $response->getData();
+    }
+
+    public function deleteSubscriberTags($id, $tag, $identifyBy = "email")
+    {
+        $request = new Request('subscribers');
+        $request->setQuery(['identified_by' => $identifyBy]);
+        $request->setIdParam($id);
+        $request->addSubresource(['name' => 'tags', 'id' => $tag]);
+
+        $response = $this->client->delete($request);
+
+        $this->assertSuccessResponse($response);
+
+        return $response->getData();
+
     }
 
     private function getSubscriberParams(array $subscriber)
