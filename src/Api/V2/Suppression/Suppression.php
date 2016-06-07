@@ -1,27 +1,13 @@
 <?php namespace Rule\ApiWrapper\Api\V2\Suppression;
 
-use Rule\ApiWrapper\Client\Client;
+use Rule\ApiWrapper\Api\Api;
 use Rule\ApiWrapper\Client\Request;
 use Rule\ApiWrapper\Client\Response;
 
 use \InvalidArgumentException;
 
-class Suppression
+class Suppression extends Api
 {
-    /**
-     * @var Client
-     */
-    private $client;
-
-    /**
-     * Suppression constructor.
-     * @param Client $client
-     */
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
     /**
      * Returns suppression list
      *
@@ -118,13 +104,6 @@ class Suppression
     {
         if(!is_int($limit)){
             throw new InvalidArgumentException('Limit is invalid');
-        }
-    }
-
-    private function assertSuccessResponse(Response $response)
-    {
-        if ($response->getStatusCode() != 200) {
-            throw new \Exception($response->getData()['message']);
         }
     }
 }

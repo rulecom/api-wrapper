@@ -1,11 +1,13 @@
 <?php namespace Rule\ApiWrapper\Api;
 
+use Rule\ApiWrapper\Client\Client;
+
 class Api
 {
     /**
      * @var Client
      */
-    private $client;
+    protected $client;
 
     /**
      * Create api instance

@@ -1,27 +1,13 @@
 <?php namespace Rule\ApiWrapper\Api\V2\Tag;
 
-use Rule\ApiWrapper\Client\Client;
+use Rule\ApiWrapper\Api\Api;
 use Rule\ApiWrapper\Client\Request;
 use Rule\ApiWrapper\Client\Response;
 
 use \InvalidArgumentException;
 
-class Tag
+class Tag extends Api
 {
-    /**
-     * @var Client
-     */
-    private $client;
-
-    /**
-     * Tag constructor.
-     * @param Client $client
-     */
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
     /**
      * Get list of tags
      *
@@ -84,12 +70,4 @@ class Tag
 
         return $response->getData();
     }
-
-    private function assertSuccessResponse(Response $response)
-    {
-        if ($response->getStatusCode() != 200) {
-            throw new \Exception($response->getData()['message']);
-        }
-    }
-
 }

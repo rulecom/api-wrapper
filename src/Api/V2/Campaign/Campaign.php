@@ -1,25 +1,13 @@
 <?php namespace Rule\ApiWrapper\Api\V2\Campaign;
 
+use Rule\ApiWrapper\Api;
+use Rule\ApiWrapper\Client\Request;
 use Rule\ApiWrapper\Client\Response;
 
 use \InvalidArgumentException;
 
-class Campaign
+class Campaign extends Api
 {
-    /**
-     * @var Client
-     */
-    private $client;
-
-    /**
-     * Campaign constructor.
-     *
-     * @param Client $client
-     */
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
 
     /**
      * Get campaigns
@@ -173,13 +161,6 @@ class Campaign
     {
         if (!isset($campaign['send_at'])) {
             throw new InvalidArgumentException('Campaign should be scheduled');
-        }
-    }
-
-    private function assertSuccessResponse(Response $response)
-    {
-        if ($response->getStatusCode() != 200) {
-            throw new \Exception($response->getData()['message']);
         }
     }
 }

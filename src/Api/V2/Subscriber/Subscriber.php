@@ -1,28 +1,13 @@
 <?php namespace Rule\ApiWrapper\Api\V2\Subscriber;
 
-use Rule\ApiWrapper\Client\Client;
+use Rule\ApiWrapper\Api\Api;
 use Rule\ApiWrapper\Client\Request;
 use Rule\ApiWrapper\Client\Response;
 
 use \InvalidArgumentException;
 
-class Subscriber
+class Subscriber extends Api
 {
-    /**
-     * @var Client
-     */
-    private $client;
-
-    /**
-     * Subscriber constructor. Creates new Subscriber instance
-     *
-     * @param Client $client
-     */
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
     /**
      * Creates new subscriber
      *
@@ -103,7 +88,7 @@ class Subscriber
      * @return array
      * @throws \Exception
      */
-    public function getSubscribersList($limit = 100)
+    public function list($limit = 100)
     {
         $request = new Request('subscribers');
         $request->setQuery(['limit' => $limit]);
@@ -125,7 +110,7 @@ class Subscriber
      * @return array
      * @throws \Exception
      */
-    public function getSubscriber($id, $identifyBy = 'email')
+    public function get($id, $identifyBy = 'email')
     {
         $request = new Request('subscribers');
         $request->setQuery(['identified_by' => $identifyBy]);
@@ -148,7 +133,7 @@ class Subscriber
      * @return array
      * @throws \Exception
      */
-    public function getSubscriberFields($id, $identifyBy = "email")
+    public function getFields($id, $identifyBy = "email")
     {
         $request = new Request('subscribers');
         $request->setQuery(['identified_by' => $identifyBy]);
@@ -162,7 +147,6 @@ class Subscriber
         return $response->getData();
     }
 
-    // TODO: look rule implementation
     /**
      * Updates subscriber
      *
@@ -174,7 +158,7 @@ class Subscriber
      * @throws Exception
      * @throws \Exception
      */
-    public function updateSubscriber($id, $subscriber)
+    public function update($id, $subscriber)
     {
         if (!$id) {
             throw new Exception('Subscriber id should be providen');
@@ -204,7 +188,7 @@ class Subscriber
      * @return array
      * @throws \Exception
      */
-    public function addSubscriberTags($id, array $tags, $identifyBy = 'email')
+    public function addTags($id, array $tags, $identifyBy = 'email')
     {
         $request = new Request('subscribers');
         $request->setQuery(['identified_by' => $identifyBy]);
@@ -230,7 +214,7 @@ class Subscriber
      * @return array
      * @throws \Exception
      */
-    public function getSubscriberTags($id, $identifyBy = "email")
+    public function getTags($id, $identifyBy = "email")
     {
         $request = new Request('subscribers');
         $request->setQuery(['identified_by' => $identifyBy]);
@@ -255,12 +239,12 @@ class Subscriber
      * @return array
      * @throws \Exception
      */
-    public function deleteSubscriberTags($id, $tag, $identifyBy = "email")
+    public function deleteTag($id, $tag, $identifyBy = "email")
     {
         $request = new Request('subscribers');
         $request->setQuery(['identified_by' => $identifyBy]);
         $request->setIdParam($id);
-        $request->addSubresource(['name' => 'tags', 'id' => $tag]);
+        $request->addSubresource(['name' => 'tags', 'id' => urlencode($tag)]);
 
         $response = $this->client->delete($request);
 
@@ -322,13 +306,6 @@ class Subscriber
                 throw new InvalidArgumentException("Invalid field type: " . $field['type']
                     . " for field: " . $field['key']);
             }
-        }
-    }
-
-    private function assertSuccessResponse(Response $response)
-    {
-        if ($response->getStatusCode() != 200) {
-            throw new \Exception($response->getData()['message']);
         }
     }
 }

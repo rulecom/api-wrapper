@@ -1,27 +1,13 @@
 <?php namespace Rule\ApiWrapper\Api\V2\Template;
 
-use Rule\ApiWrapper\Client\Client;
+use Rule\ApiWrapper\Api\Api;
 use Rule\ApiWrapper\Client\Request;
 use Rule\ApiWrapper\Client\Response;
 
 use \InvalidArgumentException;
 
-class Template
+class Template extends Api
 {
-    /**
-     * @var Client
-     */
-    private $client;
-
-    /**
-     * Template constructor.
-     * @param Client $client
-     */
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
     /**
      * Get list of templates
      *
@@ -30,7 +16,7 @@ class Template
      * @return array
      * @throws \Exception
      */
-    public function getTemplates()
+    public function list()
     {
         $request = new Request('templates');
 
@@ -50,7 +36,7 @@ class Template
      * @return array
      * @throws \Exception
      */
-    public function getTemplate($id)
+    public function get($id)
     {
         $this->assertValidTemplateId($id);
         
@@ -73,13 +59,6 @@ class Template
     {
         if(!is_int($id)) {
             throw new InvalidArgumentException('Template id is invalid');
-        }
-    }
-
-    private function assertSuccessResponse(Response $response)
-    {
-        if ($response->getStatusCode() != 200) {
-            throw new \Exception($response->getData()['message']);
         }
     }
 }

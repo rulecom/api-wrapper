@@ -1,27 +1,13 @@
 <?php namespace Rule\ApiWrapper\Api\V2\Transaction;
 
-use Rule\ApiWrapper\Client\Client;
+use Rule\ApiWrapper\Api\Api;
 use Rule\ApiWrapper\Client\Request;
 use Rule\ApiWrapper\Client\Response;
 
 use \InvalidArgumentException;
 
-class Transaction
+class Transaction extends Api
 {
-    /**
-     * @var Client
-     */
-    private $client;
-
-    /**
-     * Transaction constructor.
-     * @param Client $client
-     */
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
     /**
      * Send transaction
      *
@@ -94,13 +80,6 @@ class Transaction
     {
         if(!isset($to) || empty($to)) {
             throw new InvalidArgumentException("Recipient is empty");
-        }
-    }
-
-    private function assertSuccessResponse(Response $response)
-    {
-        if ($response->getStatusCode() != 200) {
-            throw new \Exception($response->getData()['message']);
         }
     }
 }
