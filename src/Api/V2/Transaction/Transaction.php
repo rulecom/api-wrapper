@@ -8,13 +8,29 @@ use \InvalidArgumentException;
 
 class Transaction
 {
+    /**
+     * @var Client
+     */
     private $client;
 
+    /**
+     * Transaction constructor.
+     * @param Client $client
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
+    /**
+     * Send transaction
+     *
+     * @link https://rule.se/apidoc/#transactions-send-transaction-post
+     *
+     * @param array $transaction
+     * @return array
+     * @throws \Exception
+     */
     public function send(array $transaction)
     {
         $this->assertValidTransaction($transaction);
@@ -29,6 +45,11 @@ class Transaction
         return $response->getData();
     }
 
+    /**
+     * Check if transaction data is valid
+     *
+     * @param array $transaction
+     */
     private function assertValidTransaction(array $transaction)
     {
         if(!isset($transaction['transaction_type'])) {
@@ -40,6 +61,11 @@ class Transaction
         $this->assertValidRecipient($transaction['to']);
     }
 
+    /**
+     * Check if transaction has valid content
+     *
+     * @param array $content
+     */
     private function assertValidContent(array $content)
     {
         if(!isset($content) || empty($content)) {
@@ -47,6 +73,11 @@ class Transaction
         }
     }
 
+    /**
+     * Check if transaction has valid sender data
+     *
+     * @param array $from
+     */
     private function assertValidSender(array $from)
     {
         if(!isset($from) || empty($from)) {
@@ -54,6 +85,11 @@ class Transaction
         }
     }
 
+    /**
+     * Check if transaction has valid recipient data
+     *
+     * @param array $to
+     */
     private function assertValidRecipient(array $to)
     {
         if(!isset($to) || empty($to)) {

@@ -8,13 +8,29 @@ use \InvalidArgumentException;
 
 class Tag
 {
+    /**
+     * @var Client
+     */
     private $client;
 
+    /**
+     * Tag constructor.
+     * @param Client $client
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
+    /**
+     * Get list of tags
+     *
+     * @link https://rule.se/apidoc/#tags-get-tags-get
+     *
+     * @param int $limit
+     * @return array
+     * @throws \Exception
+     */
     public function get($limit = 100)
     {
         $request = new Request('tags');
@@ -27,6 +43,15 @@ class Tag
         return $response->getData();
     }
 
+    /**
+     * Delete tag by id
+     *
+     * @link https://rule.se/apidoc/#tags-delete-tag-delete
+     *
+     * @param $id
+     * @return array
+     * @throws \Exception
+     */
     public function delete($id)
     {
         $request = new Request('tags');
@@ -39,6 +64,15 @@ class Tag
         return $response->getData();
     }
 
+    /**
+     * Clear associations between subscriber and tag
+     *
+     * @link https://rule.se/apidoc/#tags-clear-tag-delete
+     *
+     * @param $id
+     * @return array
+     * @throws \Exception
+     */
     public function clear($id)
     {
         $request = new Request('tags');

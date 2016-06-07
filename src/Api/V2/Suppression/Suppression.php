@@ -8,14 +8,29 @@ use \InvalidArgumentException;
 
 class Suppression
 {
-
+    /**
+     * @var Client
+     */
     private $client;
 
+    /**
+     * Suppression constructor.
+     * @param Client $client
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
+    /**
+     * Returns suppression list
+     *
+     * @link https://rule.se/apidoc/#suppressions-get-suppressions-get
+     *
+     * @param int $limit
+     * @return array
+     * @throws \Exception
+     */
     public function get($limit = 100)
     {
         $this->assertValidLimit($limit);
@@ -30,6 +45,15 @@ class Suppression
         return $response->getData();
     }
 
+    /**
+     * Creates new Suppression
+     *
+     * @link https://rule.se/apidoc/#suppressions-suppressions-post
+     *
+     * @param array $suppression
+     * @return array
+     * @throws \Exception
+     */
     public function create(array $suppression)
     {
         $this->assertValidSuppression($suppression);
@@ -44,6 +68,11 @@ class Suppression
         return $response->getData();
     }
 
+    /**
+     * Check if Suppression data is valid
+     * 
+     * @param array $suppression
+     */
     private function assertValidSuppression(array $suppression)
     {
         if (!isset($suppression['subscribers'])) {
@@ -56,13 +85,23 @@ class Suppression
         }
     }
 
-    private function assertValidCampaign($suppress_on)
+    /**
+     * Check if campaign is not empty
+     * 
+     * @param $campaign
+     */
+    private function assertValidCampaign($campaign)
     {
         if (!isset($campaign)) {
             throw new InvalidArgumentException('Campaign should be provided');
         }
     }
 
+    /**
+     * Check is transaction is not empty
+     * 
+     * @param $transaction
+     */
     private function assertValidTransaction($transaction)
     {
         if(!isset($transaction)) {
@@ -70,6 +109,11 @@ class Suppression
         }
     }
 
+    /**
+     * Check if limit is valid
+     * 
+     * @param $limit
+     */
     private function assertValidLimit($limit)
     {
         if(!is_int($limit)){

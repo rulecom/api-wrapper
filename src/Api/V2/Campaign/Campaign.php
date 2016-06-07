@@ -24,6 +24,8 @@ class Campaign
     /**
      * Get campaigns
      *
+     * @link https://rule.se/apidoc/#campaigns-campaigns-get
+     *
      * @param integer $limit Limit for the campaigns count, default 100 max 100
      * @return array Request result
      * @throws \Exception 
@@ -42,6 +44,8 @@ class Campaign
 
     /**
      * Get campaign data.
+     *
+     * @link https://rule.se/apidoc/#campaigns-get-campaign-get
      *
      * @param integer $id Id of the campaign.
      * @return array Request result
@@ -62,6 +66,8 @@ class Campaign
     /**
      * Get campaign statistics.
      *
+     * @link https://rule.se/apidoc/#campaigns-get-statistics-get
+     *
      * @param integer $id Id of the campaign.
      * @return array Request result
      * @throws \Exception
@@ -80,6 +86,8 @@ class Campaign
 
     /**
      * Send campaign.
+     *
+     * @link https://rule.se/apidoc/#campaigns-send-campaign-post
      *
      * @param array $campaign Campaign data formated according {@link https://rule.se/apidoc/#campaigns-send-campaign-post}
      * @return array
@@ -102,6 +110,8 @@ class Campaign
 
     /**
      * Schedule campaign.
+     *
+     * @link https://rule.se/apidoc/#campaigns-schedule-campaign-post
      *
      * @param array $campaign Campaign data formated according {@link https://rule.se/apidoc/#campaigns-send-campaign-post}
      * @return array

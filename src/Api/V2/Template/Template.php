@@ -8,13 +8,28 @@ use \InvalidArgumentException;
 
 class Template
 {
+    /**
+     * @var Client
+     */
     private $client;
 
+    /**
+     * Template constructor.
+     * @param Client $client
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
+    /**
+     * Get list of templates
+     *
+     * @link https://rule.se/apidoc/#templates-get-templates-get
+     *
+     * @return array
+     * @throws \Exception
+     */
     public function getTemplates()
     {
         $request = new Request('templates');
@@ -26,6 +41,15 @@ class Template
         return $response->getData();
     }
 
+    /**
+     * Get template by id
+     *
+     * @link https://rule.se/apidoc/#templates-get-template-get
+     *
+     * @param $id
+     * @return array
+     * @throws \Exception
+     */
     public function getTemplate($id)
     {
         $this->assertValidTemplateId($id);
@@ -40,6 +64,11 @@ class Template
         return $response->getData();
     }
 
+    /**
+     * Check if template id is valid
+     *
+     * @param $id
+     */
     private function assertValidTemplateId($id)
     {
         if(!is_int($id)) {
