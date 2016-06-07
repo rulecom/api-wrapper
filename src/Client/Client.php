@@ -28,9 +28,9 @@ abstract class Client
      * @param string $apiKey 
      */
     public function __construct(
-        string $apiKey,
-        string $version = 'v2',
-        string $baseUrl = "http://rule.io/api/")
+        $apiKey,
+        $version = 'v2',
+        $baseUrl = "http://rule.io/api/")
     {
         $this->apiKey = $apiKey;
         $this->version = $version;
@@ -64,6 +64,21 @@ abstract class Client
     public function getBaseUrl()
     {
         return $this->baseUrl;
+    }
+
+    public function setApiKey($key)
+    {
+        $this->apiKey = $key;
+    }
+
+    public function setVersion($version)
+    {
+        $this->version = $version;
+    }
+
+    public function setBaseUrl($baseUrl)
+    {
+        $this->baseUrl = $baseUrl;
     }
 
     /**

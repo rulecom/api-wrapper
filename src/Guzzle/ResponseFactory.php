@@ -7,6 +7,20 @@ class ResponseFactory
 {
     public static function make(Response $response)
     {
-        return new RuleResponse($response->getStatusCode(), json_decode($response->getBody()));
+
+        $code = $response->getStatusCode();
+        $body = [];
+
+        if ($response->getStatusCode() == 200) {
+            $body = json_decode($response->getBody(), true);
+
+            if (!is_array($body) && is_string($body)) {
+                $body = ['message' => $body];
+            }
+        } else {
+            $body = ['message' => $response->getReasonPhrase()];
+        }
+
+        return new RuleResponse($code, $body);
     }
 }

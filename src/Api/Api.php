@@ -1,6 +1,9 @@
 <?php namespace Rule\ApiWrapper\Api;
 
 use Rule\ApiWrapper\Client\Client;
+use Rule\ApiWrapper\Client\Request;
+use Rule\ApiWrapper\Client\Response;
+use Rule\ApiWrapper\Api\Exception\ResponseErrorException;
 
 class Api
 {
@@ -15,6 +18,16 @@ class Api
     public function __construct(Client $client)
     {
         $this->client = $client;
+    }
+
+    /**
+     * Get http client
+     *
+     * @return Client
+     */
+    public function getClient()
+    {
+        return $this->client;
     }
 
     /**

@@ -88,7 +88,7 @@ class Subscriber extends Api
      * @return array
      * @throws \Exception
      */
-    public function list($limit = 100)
+    public function getList($limit = 100)
     {
         $request = new Request('subscribers');
         $request->setQuery(['limit' => $limit]);
@@ -135,10 +135,10 @@ class Subscriber extends Api
      */
     public function getFields($id, $identifyBy = "email")
     {
-        $request = new Request('subscribers');
+        $request = new Request('subscriber');
         $request->setQuery(['identified_by' => $identifyBy]);
         $request->setIdParam($id);
-        $request->setSubresource('fields');
+        $request->addSubresource(['name' => 'fields']);
 
         $response = $this->client->get($request);
 

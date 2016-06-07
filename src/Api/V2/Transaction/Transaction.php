@@ -5,7 +5,7 @@ use Rule\ApiWrapper\Client\Request;
 use Rule\ApiWrapper\Client\Response;
 
 use \InvalidArgumentException;
-
+// TODO: make separate sendEmail and sendTextMessage methods
 class Transaction extends Api
 {
     /**
@@ -20,6 +20,11 @@ class Transaction extends Api
     public function send(array $transaction)
     {
         $this->assertValidTransaction($transaction);
+
+        if ($transaction['transaction_type'] == 'email') {
+            $transaction['content']['plain'] = base64_encode($transaction['content']['plain']);
+            $transaction['content']['html'] = base64_encode($transaction['content']['html']);
+        }
 
         $request = new Request('transactionals');
         $request->setParams($transaction);
@@ -52,9 +57,9 @@ class Transaction extends Api
      *
      * @param array $content
      */
-    private function assertValidContent(array $content)
+    private function assertValidContent($content)
     {
-        if(!isset($content) || empty($content)) {
+        if(empty($content)) {
             throw new InvalidArgumentException("Content is empty");
         }
     }

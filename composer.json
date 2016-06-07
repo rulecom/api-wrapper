@@ -8,6 +8,12 @@
             "email" : "stanislav.kalashnik@rule.se",
             "homepage" : "https://github.com/athe0i",
             "role" : "Developer"
+        },
+        {
+            "name" : "Ivan Shamota",
+            "email" : "ivan.shamota@rule.se",
+            "homepage" : "https://github.com/shamota",
+            "role" : "Developer"
         }
     ],
 
@@ -17,13 +23,20 @@
 
     "autoload" : {
         "psr-4": {
-            "Rule\\ApiWrapper\\": "src"
+            "Rule\\ApiWrapper\\": "src/"
+        }
+    },
+    "autoload-dev" : {
+        "psr-4": {
+            "spec\\Rule\\ApiWrapper\\": "spec/",
+            "tests\\Rule\\ApiWrapper\\" : "tests/"
         }
     },
     "require": {
         "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
+        "phpunit/phpunit": "^5.4",
         "phpspec/phpspec": "^2.5"
     }
 }

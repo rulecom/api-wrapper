@@ -16,7 +16,7 @@ class Template extends Api
      * @return array
      * @throws \Exception
      */
-    public function list()
+    public function getList()
     {
         $request = new Request('templates');
 

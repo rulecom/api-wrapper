@@ -2,12 +2,11 @@
 
 use Rule\ApiWrapper\Client\Request as RuleRequest;
 use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Client;
 
 class RequestFactory
 {
-    public static function make(Client $client, RuleRequest $request)
+    public static function make(RuleRequest $request, $baseUrl = "")
     {
-        return new Request($request->getMethod(), $request->getRelativeUrl());
+        return new Request($request->getMethod(), $baseUrl . $request->getRelativeUrl());
     }
 }

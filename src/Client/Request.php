@@ -65,9 +65,9 @@ class Request
     /**
      * Sets id parameter to Request
      *
-     * @param array $idParam
+     * @param string $idParam
      */
-    public function setIdParam(array $idParam)
+    public function setIdParam($idParam)
     {
         $this->idParam = $idParam;
     }
@@ -107,7 +107,7 @@ class Request
      *
      * @param string $resource
      */
-    public function setResource(string $resource)
+    public function setResource($resource)
     {
         $this->resource = $resource;
     }
@@ -149,6 +149,10 @@ class Request
      */
     public function addSubresource(array $subresource)
     {
+        if(!isset($subresource['id'])) {
+            $subresource['id'] = null;
+        }
+
         $this->subresources[] = $subresource;
     }
 
@@ -157,7 +161,7 @@ class Request
      *
      * @param string $method
      */
-    public function setMethod(string $method)
+    public function setMethod($method)
     {
         $this->method = $method;
     }

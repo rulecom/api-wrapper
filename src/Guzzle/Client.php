@@ -26,12 +26,12 @@ class Client extends AbstractClient
      * @param string $baseUrl
      */
     public function __construct(
-        string $apiKey,
-        string $version = 'v2',
-        string $baseUrl = "http://rule.io/api/")
+        $apiKey,
+        $version = 'v2',
+        $baseUrl = "http://rule.io/api/")
     {
-        parent::construct($apiKey, $version, $baseUrl);
-
+        parent::__construct($apiKey, $version, $baseUrl);
+        //var_dump($this->getBaseUrl() . $this->getVersion());
         $this->guzzleClient = new GuzzleClient([
             'base_uri' => $this->getBaseUrl() . $this->getVersion(),
             'query' => ['apikey' => $this->getApiKey()]
@@ -91,8 +91,9 @@ class Client extends AbstractClient
     private function sendRequest($method, Request $request)
     {
         $request->setMethod($method);
-        $response = $this->guzzleClient()->send(
-            RequestFactory::make($request),
+
+        $response = $this->guzzleClient->send(
+            RequestFactory::make($request, $this->getBaseUrl() . $this->getVersion()),
             $this->getRequestOptions($request)
         );
 
@@ -107,10 +108,13 @@ class Client extends AbstractClient
      */
     private function getRequestOptions(Request $request)
     {
-        $options = [];
+        $options = [
+            'http_errors' => false,
+            'synchronous' => true
+        ];
 
         if ($request->getQuery())
-            $options['query'] = $request->getQuery();
+            $options['query'] = array_merge($this->guzzleClient->getConfig('query'), $request->getQuery());
 
         if ($request->getParams())
             $options['json'] = $request->getParams();

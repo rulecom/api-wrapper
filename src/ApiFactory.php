@@ -1,7 +1,7 @@
 <?php namespace Rule\ApiWrapper;
 
 use Rule\ApiWrapper\Guzzle\Client;
-
+use Rule\ApiWrapper\Api\Exception\InvalidResourceException;
 use Rule\ApiWrapper\Api\V2\Subscriber\Subscriber;
 use Rule\ApiWrapper\Api\V2\Campaign\Campaign;
 use Rule\ApiWrapper\Api\V2\Customization\Customization;
@@ -22,7 +22,13 @@ class ApiFactory
     public static function make($key, $resource, $version = 'v2')
     {
         $client = new Client($key, $version);
-        $classname = ucfirst($resource);
+
+        $namespace = 'Rule\\ApiWrapper\\Api\\' . strtoupper($version) . '\\' . ucfirst($resource) . '\\';
+        $classname = $namespace . ucfirst($resource);
+
+        if (!class_exists($classname)) {
+            throw new InvalidResourceException("Invalid resource name providen or api version not supported");
+        }
 
         return new $classname($client);
     }
