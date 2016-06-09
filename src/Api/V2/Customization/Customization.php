@@ -20,7 +20,7 @@ class Customization extends Api
         $this->assertValidFields($fields);
 
         $request = new Request('customizations');
-        $request->setParams($fields);
+        $request->setParams(['fields' => $fields]);
 
         $response = $this->client->post($request);
 
@@ -35,7 +35,7 @@ class Customization extends Api
      * @param integer $limit Limit of the results count
      * @return array Request result
      */
-    public function list($limit = 100)
+    public function getList($limit = 100)
     {
         $request = new Request('customizations');
         $request->setQuery(['limit' =>$limit]);
@@ -77,8 +77,8 @@ class Customization extends Api
             throw new InvalidArgumentException("Fields are empty");
         }
 
-        foreach($fields as $key=>$value) {
-            if(count(explode('.', $key)) !== 2) {
+        foreach($fields as $field) {
+            if(count(explode('.', $field['key'])) != 2) {
                 throw new InvalidArgumentException('Key has wrong format');
             }
         }

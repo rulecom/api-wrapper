@@ -1,6 +1,6 @@
 <?php namespace Rule\ApiWrapper\Api\V2\Campaign;
 
-use Rule\ApiWrapper\Api;
+use Rule\ApiWrapper\Api\Api;
 use Rule\ApiWrapper\Client\Request;
 use Rule\ApiWrapper\Client\Response;
 
@@ -18,7 +18,7 @@ class Campaign extends Api
      * @return array Request result
      * @throws \Exception 
      */
-    public function list($limit = 100)
+    public function getList($limit = 100)
     {
         $request = new Request('campaigns');
         $request->setQuery(['limit' => $limit]);
@@ -142,7 +142,7 @@ class Campaign extends Api
             throw new InvalidArgumentException('Appropriate message_type should be set');
         }
 
-        if (!isset($campaign['recepients'])) {
+        if (!isset($campaign['recipients'])) {
             throw new InvalidArgumentException('Recipients should be set');
         }
 

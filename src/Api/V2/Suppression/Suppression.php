@@ -17,7 +17,7 @@ class Suppression extends Api
      * @return array
      * @throws \Exception
      */
-    public function get($limit = 100)
+    public function getList($limit = 100)
     {
         $this->assertValidLimit($limit);
 
@@ -40,12 +40,14 @@ class Suppression extends Api
      * @return array
      * @throws \Exception
      */
-    public function create(array $suppression)
+    public function create(array $suppressions)
     {
-        $this->assertValidSuppression($suppression);
+        foreach ($suppressions as $suppression) {
+            $this->assertValidSuppression($suppression);
+        }
 
         $request = new Request('suppressions');
-        $request->setParams($suppression);
+        $request->setParams(['subscribers' => $suppressions]);
 
         $response = $this->client->post($request);
 
@@ -61,13 +63,11 @@ class Suppression extends Api
      */
     private function assertValidSuppression(array $suppression)
     {
-        if (!isset($suppression['subscribers'])) {
-            throw new InvalidArgumentException("Subscribers can't be empty");
-        }
-
         if (isset($suppression['suppress_on'])) {
-            $this->assertValidCampaign($suppression['suppress_on']['campaign']);
-            $this->assertValidTransaction($suppression['suppress_on']['transaction']);
+            if(isset($suppression['suppress_on']['campaign']))
+                $this->assertValidCampaign($suppression['suppress_on']['campaign']);
+            if(isset($suppression['suppress_on']['transaction']))
+                $this->assertValidTransaction($suppression['suppress_on']['transaction']);
         }
     }
 
@@ -78,8 +78,8 @@ class Suppression extends Api
      */
     private function assertValidCampaign($campaign)
     {
-        if (!isset($campaign)) {
-            throw new InvalidArgumentException('Campaign should be provided');
+        if (!is_array($campaign)) {
+            throw new InvalidArgumentException('Campaign suppression should be an array');
         }
     }
 
@@ -90,8 +90,8 @@ class Suppression extends Api
      */
     private function assertValidTransaction($transaction)
     {
-        if(!isset($transaction)) {
-            throw new InvalidArgumentException('Transaction should be provided');
+        if(!is_array($transaction)) {
+            throw new InvalidArgumentException('Transaction suppression should be an array');
         }
     }
 

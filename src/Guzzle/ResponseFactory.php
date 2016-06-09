@@ -19,6 +19,7 @@ class ResponseFactory
             }
         } else {
             $body = ['message' => $response->getReasonPhrase()];
+            //var_dump(json_decode($response->getBody()));
         }
 
         return new RuleResponse($code, $body);

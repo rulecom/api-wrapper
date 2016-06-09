@@ -17,7 +17,7 @@ class Tag extends Api
      * @return array
      * @throws \Exception
      */
-    public function get($limit = 100)
+    public function getList($limit = 100)
     {
         $request = new Request('tags');
         $request->setQuery(['limit' => $limit]);
