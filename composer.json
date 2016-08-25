@@ -1,7 +1,7 @@
 {
     "name" : "rulecom/api-wrapper",
     "description" : "Api wrapper for the RULE mailer.",
-    "version" : "1.0.0-b",
+    "version" : "1.0.0",
     "authors" : [
         {
             "name" : "Stanislav Kalashnik",
@@ -37,6 +37,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^5.4",
-        "phpspec/phpspec": "^2.5"
+        "phpspec/phpspec": "^2.5",
+        "phpdocumentor/phpdocumentor": "~2.8",
+        "cvuorinen/phpdoc-markdown-public": "*"
     }
 }
