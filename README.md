@@ -4,3 +4,6 @@ Package wrapping an [RULE Mailer api](https://rule.se/apidoc/) using an `guzzleh
 #Installation#
 Regular composer installation supposed, like:
 `composer require rulecom/api-wrapper`
+
+#Docs#
+For the docs please refer [docs](docs/README.md) folder in this repository.
