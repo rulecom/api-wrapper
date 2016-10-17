@@ -28,7 +28,7 @@ class Client extends AbstractClient
     public function __construct(
         $apiKey,
         $version = 'v2',
-        $baseUrl = "http://rule.io/api/")
+        $baseUrl = "http://app.rule.io/api/")
     {
         parent::__construct($apiKey, $version, $baseUrl);
         //var_dump($this->getBaseUrl() . $this->getVersion());

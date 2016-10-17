@@ -30,7 +30,7 @@ abstract class Client
     public function __construct(
         $apiKey,
         $version = 'v2',
-        $baseUrl = "http://rule.io/api/")
+        $baseUrl = "http://app.rule.io/api/")
     {
         $this->apiKey = $apiKey;
         $this->version = $version;
