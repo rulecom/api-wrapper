@@ -9,17 +9,16 @@ class ResponseFactory
     {
 
         $code = $response->getStatusCode();
-        $body = [];
+        $body = json_decode($response->getBody(), true);
 
         if ($response->getStatusCode() == 200) {
-            $body = json_decode($response->getBody(), true);
-
             if (!is_array($body) && is_string($body)) {
                 $body = ['message' => $body];
             }
         } else {
-            $body = ['message' => $response->getReasonPhrase()];
-            //var_dump(json_decode($response->getBody()));
+            if (!$body['message']) {
+                $body = ['message' => $response->getReasonPhrase(), 'details' => $body];
+            }
         }
 
         return new RuleResponse($code, $body);
