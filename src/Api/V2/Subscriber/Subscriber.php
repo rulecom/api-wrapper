@@ -19,13 +19,14 @@ class Subscriber extends Api
      */
     public function create(array $subscriber)
     {
-        $defaults = ['language' => 'sv', 'update_on_duplicate' => true, 'tags' => []];
+        $defaults = ['language' => 'sv', 'update_on_duplicate' => true, 'tags' => [], 'automation' => false];
 
         $subscriber = array_merge($defaults, $subscriber);
 
         $this->assertValidSubscriberParams($subscriber);
 
         $params = [
+            'automation' => $subscriber['automation'],
             'update_on_duplicate' => $subscriber['update_on_duplicate'],
             'tags' => $subscriber['tags'],
             'subscribers' => $this->getSubscriberParams($subscriber)
@@ -52,7 +53,7 @@ class Subscriber extends Api
      */
     public function createMultiple(array $subscribers)
     {
-        $defaults = ['language' => 'sv', 'update_on_duplicate' => true, 'tags' => []];
+        $defaults = ['language' => 'sv', 'update_on_duplicate' => true, 'tags' => [], 'automation' => false];
 
         $subscribers = array_merge($defaults, $subscribers);
 
@@ -61,6 +62,7 @@ class Subscriber extends Api
         }
 
         $params = [
+            'automation' =>  $subscribers['automation'],
             'update_on_duplicate' => $subscribers['update_on_duplicate'],
             'tags' => $subscribers['tags']
         ];
@@ -254,6 +256,11 @@ class Subscriber extends Api
 
     }
 
+    /**
+     * @param array $subscriber
+     * TODO: refactor this
+     * @return array
+     */
     private function getSubscriberParams(array $subscriber)
     {
         $params = [];
