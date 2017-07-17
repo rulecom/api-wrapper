@@ -1,11 +1,11 @@
-#RULE api wrapper
+# RULE api wrapper
 Package wrapping an [RULE Mailer api](https://rule.se/apidoc/) using an `guzzlehttp` client as backend for the requests
 
-#Installation
+# Installation
 Regular composer installation supposed, like:
 `composer require rulecom/api-wrapper`
 
-#Integration with Laravel
+# Integration with Laravel
 Use `src/LaravelServiceProvider.php` to register API instances in your application.
 Create `config/rule-api.php` file for the API configuration. 
 
@@ -35,5 +35,5 @@ class Foo
 ```
 
 
-#Docs
+# Docs
 For the docs please refer [docs](docs/README.md) folder in this repository.
