@@ -32,6 +32,8 @@ class Foo
         ]);
     }
 }
+```
+
 
 #Docs
 For the docs please refer [docs](docs/README.md) folder in this repository.
