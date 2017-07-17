@@ -8,24 +8,25 @@ abstract class Client
      * @var string 
      * Base url for the requests
      */
-    private $baseUrl;
+    protected $baseUrl;
 
     /**
      * @var string
      * Api key for the RULE account.
      */
-    private $apiKey;
+    protected $apiKey;
 
     /**
      * @var string
      * RULE api version
      */
-    private $version;
+    protected $version;
 
     /**
-     * Create new Client instance
-     *
-     * @param string $apiKey 
+     * Client constructor.
+     * @param $apiKey
+     * @param string $version
+     * @param string $baseUrl
      */
     public function __construct(
         $apiKey,

@@ -1,7 +1,7 @@
 {
     "name" : "rulecom/api-wrapper",
     "description" : "Api wrapper for the RULE mailer.",
-    "version" : "1.0.2",
+    "version" : "1.0.3",
     "authors" : [
         {
             "name" : "Stanislav Kalashnik",

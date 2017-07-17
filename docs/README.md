@@ -34,6 +34,8 @@
     * [getList](#getlist-1)
     * [get](#get-2)
 * [InvalidResourceException](#invalidresourceexception)
+* [LaravelServiceProvider](#laravelserviceprovider)
+    * [register](#register)
 * [Request](#request)
     * [__construct](#__construct-4)
     * [setQuery](#setquery)
@@ -71,6 +73,9 @@
     * [addTags](#addtags)
     * [getTags](#gettags)
     * [deleteTag](#deletetag)
+    * [delete](#delete-1)
+    * [deleteMultiple](#deletemultiple)
+    * [import](#import)
 * [Suppression](#suppression)
     * [__construct](#__construct-7)
     * [getClient](#getclient-4)
@@ -80,7 +85,7 @@
     * [__construct](#__construct-8)
     * [getClient](#getclient-5)
     * [getList](#getlist-4)
-    * [delete](#delete-1)
+    * [delete](#delete-2)
     * [clear](#clear)
 * [Template](#template)
     * [__construct](#__construct-9)
@@ -116,7 +121,7 @@ Api::__construct( \Rule\ApiWrapper\Client\Client $client )
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$client` | **\Rule\ApiWrapper\Client\Client** |  |
+| `$client` | **\Rule\ApiWrapper\Client\Client** | HTTP client implementation for api |
 
 
 
@@ -197,7 +202,7 @@ Campaign::__construct( \Rule\ApiWrapper\Client\Client $client )
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$client` | **\Rule\ApiWrapper\Client\Client** |  |
+| `$client` | **\Rule\ApiWrapper\Client\Client** | HTTP client implementation for api |
 
 
 
@@ -372,7 +377,7 @@ Campaign::schedule( array $campaign ): array
 Creates new Guzzle client instance
 
 ```php
-Client::__construct( string $apiKey, string $version = &#039;v2&#039;, string $baseUrl = &quot;http://rule.io/api/&quot; )
+Client::__construct( string $apiKey, string $version = &#039;v2&#039;, string $baseUrl = &quot;http://app.rule.io/api/&quot; )
 ```
 
 Client constructor.
@@ -618,7 +623,7 @@ Customization::__construct( \Rule\ApiWrapper\Client\Client $client )
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$client` | **\Rule\ApiWrapper\Client\Client** |  |
+| `$client` | **\Rule\ApiWrapper\Client\Client** | HTTP client implementation for api |
 
 
 
@@ -728,6 +733,32 @@ Request result
 * Full name: \Rule\ApiWrapper\Api\Exception\InvalidResourceException
 * Parent class: 
 
+
+## LaravelServiceProvider
+
+
+
+
+
+* Full name: \Rule\ApiWrapper\LaravelServiceProvider
+* Parent class: 
+
+
+### register
+
+
+
+```php
+LaravelServiceProvider::register(  )
+```
+
+
+
+
+
+
+
+---
 
 ## Request
 
@@ -1192,7 +1223,7 @@ Subscriber::__construct( \Rule\ApiWrapper\Client\Client $client )
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$client` | **\Rule\ApiWrapper\Client\Client** |  |
+| `$client` | **\Rule\ApiWrapper\Client\Client** | HTTP client implementation for api |
 
 
 
@@ -1448,6 +1479,86 @@ Subscriber::deleteTag(  $id,  $tag, string $identifyBy = &quot;email&quot; ): ar
 
 ---
 
+### delete
+
+
+
+```php
+Subscriber::delete( integer|string $id, string $identifiedBy = &#039;email&#039; ): array
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$id` | **integer&#124;string** | User identifier to delete |
+| `$identifiedBy` | **string** | Identifier type |
+
+
+**Return Value:**
+
+Server response
+
+
+**See Also:**
+
+* https://rule.se/apidoc/#subscribers-delete-subscriber-delete 
+
+---
+
+### deleteMultiple
+
+
+
+```php
+Subscriber::deleteMultiple( array $subscribers ): array
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$subscribers` | **array** |  |
+
+
+
+
+---
+
+### import
+
+
+
+```php
+Subscriber::import( string $filename, array $mappings, array $tags ): array
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$filename` | **string** | Name of the file stored on s3 |
+| `$mappings` | **array** | Mappings for the columns |
+| `$tags` | **array** | Tags to import to |
+
+
+**Return Value:**
+
+Response data
+
+
+
+---
+
 ## Suppression
 
 
@@ -1473,7 +1584,7 @@ Suppression::__construct( \Rule\ApiWrapper\Client\Client $client )
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$client` | **\Rule\ApiWrapper\Client\Client** |  |
+| `$client` | **\Rule\ApiWrapper\Client\Client** | HTTP client implementation for api |
 
 
 
@@ -1571,7 +1682,7 @@ Tag::__construct( \Rule\ApiWrapper\Client\Client $client )
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$client` | **\Rule\ApiWrapper\Client\Client** |  |
+| `$client` | **\Rule\ApiWrapper\Client\Client** | HTTP client implementation for api |
 
 
 
@@ -1694,7 +1805,7 @@ Template::__construct( \Rule\ApiWrapper\Client\Client $client )
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$client` | **\Rule\ApiWrapper\Client\Client** |  |
+| `$client` | **\Rule\ApiWrapper\Client\Client** | HTTP client implementation for api |
 
 
 
@@ -1786,7 +1897,7 @@ Transaction::__construct( \Rule\ApiWrapper\Client\Client $client )
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$client` | **\Rule\ApiWrapper\Client\Client** |  |
+| `$client` | **\Rule\ApiWrapper\Client\Client** | HTTP client implementation for api |
 
 
 
@@ -1837,4 +1948,4 @@ Transaction::send( array $transaction ): array
 
 
 --------
-> This document was automatically generated from source code comments on 2016-08-25 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)
+> This document was automatically generated from source code comments on 2017-07-17 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)

@@ -163,7 +163,7 @@ class Subscriber extends Api
     public function update($id, $subscriber)
     {
         if (!$id) {
-            throw new Exception('Subscriber id should be providen');
+            throw new \Exception('Subscriber id should be providen');
         }
 
         $this->assertValidSubscriberParams($subscriber);
@@ -254,6 +254,64 @@ class Subscriber extends Api
 
         return $response->getData();
 
+    }
+
+    /**
+     * @link https://rule.se/apidoc/#subscribers-delete-subscriber-delete
+     * @param int|string $id User identifier to delete
+     * @param string $identifiedBy Identifier type
+     * @return array Server response
+     */
+    public function delete($id, $identifiedBy = 'email')
+    {
+        $request = new Request('subscribers');
+        $request->setQuery(['identified_by' => $identifiedBy]);
+        $request->setIdParam($id);
+
+        $response = $this->client->delete($request);
+
+        $this->assertSuccessResponse($response);
+
+        return $response->getData();
+    }
+
+    /**
+     * @param array $subscribers
+     * @return array
+     */
+    public function deleteMultiple(array $subscribers)
+    {
+        $request = new Request('subscribers');
+        $request->setParams($subscribers);
+
+        $response = $this->client->delete($request);
+
+        $this->assertSuccessResponse($response);
+
+        return $response->getData();
+    }
+
+    /**
+     * @param string $filename Name of the file stored on s3
+     * @param array $mappings Mappings for the columns
+     * @param array $tags Tags to import to
+     * @return array Response data
+     */
+    public function import($filename, array $mappings, array $tags)
+    {
+        $params = [
+            'filename' => $filename,
+            'mappings' => $mappings,
+            'tags' => $tags
+        ];
+
+        $request = new Request('import');
+        $request->setParams($params);
+        $response = $this->client->post($request);
+
+        $this->assertSuccessResponse($response);
+
+        return $response->getData();
     }
 
     /**

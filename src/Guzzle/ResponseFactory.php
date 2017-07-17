@@ -9,14 +9,14 @@ class ResponseFactory
     {
 
         $code = $response->getStatusCode();
-        $body = json_decode($response->getBody(), true);
+        $body = json_decode((string) $response->getBody(), true);
 
         if ($response->getStatusCode() == 200) {
             if (!is_array($body) && is_string($body)) {
                 $body = ['message' => $body];
             }
         } else {
-            if (!$body['message']) {
+            if (!isset($body['message'])) {
                 $body = ['message' => $response->getReasonPhrase(), 'details' => $body];
             }
         }

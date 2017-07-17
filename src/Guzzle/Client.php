@@ -31,7 +31,7 @@ class Client extends AbstractClient
         $baseUrl = "http://app.rule.io/api/")
     {
         parent::__construct($apiKey, $version, $baseUrl);
-        //var_dump($this->getBaseUrl() . $this->getVersion());
+
         $this->guzzleClient = new GuzzleClient([
             'base_uri' => $this->getBaseUrl() . $this->getVersion(),
             'query' => ['apikey' => $this->getApiKey()]
@@ -113,12 +113,19 @@ class Client extends AbstractClient
             'synchronous' => true
         ];
 
-        if ($request->getQuery())
-            $options['query'] = array_merge($this->guzzleClient->getConfig('query'), $request->getQuery());
-
+        if ($request->getQuery()) {
+            $options['query'] = array_merge($this->getDefaultQuery(), $request->getQuery());
+        } else {
+            $options['query'] = $this->getDefaultQuery();
+        }
         if ($request->getParams())
             $options['json'] = $request->getParams();
 
         return $options;
+    }
+
+    private function getDefaultQuery()
+    {
+        return ['apikey' => $this->getApiKey()];
     }
 }

@@ -14,6 +14,7 @@ class Api
 
     /**
      * Create api instance
+     * @param Client $client HTTP client implementation for api
      */
     public function __construct(Client $client)
     {
