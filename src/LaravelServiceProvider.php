@@ -24,7 +24,11 @@ class LaravelServiceProvider extends ServiceProvider
             ? config('rule-api.base_url')
             : config('rule-api.base_url') . '/';
         $clientImplementation = config('rule-api.api_client', DefaultClient::class);
-        $client = new $clientImplementation(config('rule-api.api_key'), config('rule-api.api_version', 'v2'), $url);
+        $client = new $clientImplementation(
+            config('rule-api.api_key'),
+            config('rule-api.api_version', 'v2'),
+            $url);
+
         $this->app->instance(AbstractClient::class, $client);
 
         $this->app->instance(Subscriber::class, new Subscriber($this->app->make(AbstractClient::class)));
