@@ -47,6 +47,7 @@ class Client extends AbstractClient
     protected function makeLogData(Request $request)
     {
         return [
+            'api_key' => $this->getApiKey(),
             'relative_url' => $request->getRelativeUrl(),
             'query' => $request->getQuery(),
             'body' => $request->getParams(),
