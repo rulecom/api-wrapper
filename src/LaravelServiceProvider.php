@@ -24,20 +24,41 @@ class LaravelServiceProvider extends ServiceProvider
             ? config('rule-api.base_url')
             : config('rule-api.base_url') . '/';
         $clientImplementation = config('rule-api.api_client', DefaultClient::class);
-        $client = new $clientImplementation(
-            config('rule-api.api_key'),
-            config('rule-api.api_version', 'v2'),
-            $url);
 
-        $this->app->instance(AbstractClient::class, $client);
+        $this->app->bind(AbstractClient::class, function ($app) use ($clientImplementation, $url) {
+            return new $clientImplementation(
+                config('rule-api.api_key'),
+                config('rule-api.api_version', 'v2'),
+                $url);
+        });
 
-        $this->app->instance(Subscriber::class, new Subscriber($this->app->make(AbstractClient::class)));
-        $this->app->instance(Campaign::class, new Campaign($this->app->make(AbstractClient::class)));
-        $this->app->instance(Transaction::class, new Transaction($this->app->make(AbstractClient::class)));
-        $this->app->instance(Tag::class, new Tag($this->app->make(AbstractClient::class)));
-        $this->app->instance(Suppression::class, new Suppression($this->app->make(AbstractClient::class)));
-        $this->app->instance(Template::class, new Template($this->app->make(AbstractClient::class)));
-        $this->app->instance(Customization::class, new Customization($this->app->make(AbstractClient::class)));
+        $this->app->bind(Subscriber::class, function ($app) {
+            return new Subscriber($this->app->make(AbstractClient::class));
+        });
+
+        $this->app->bind(Campaign::class, function ($app) {
+            return new Campaign($this->app->make(AbstractClient::class));
+        });
+
+        $this->app->bind(Transaction::class, function ($app) {
+            return new Transaction($this->app->make(AbstractClient::class));
+        });
+
+        $this->app->bind(Tag::class, function ($app) {
+            return new Tag($this->app->make(AbstractClient::class));
+        });
+
+        $this->app->bind(Suppression::class, function ($app) {
+            return new Suppression($this->app->make(AbstractClient::class));
+        });
+
+        $this->app->bind(Template::class, function ($app) {
+            return new Template($this->app->make(AbstractClient::class));
+        });
+
+        $this->app->bind(Customization::class, function ($app) {
+            return new Customization($this->app->make(AbstractClient::class));
+        });
     }
 
 }

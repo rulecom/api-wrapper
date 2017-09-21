@@ -68,8 +68,8 @@ class Subscriber extends Api
         ];
 
         $params['subscribers'] = array_map(function($subscriber){
-                return $this->getSubscriberParams($subscriber);
-            }, $subscribers['subscribers']);
+            return $this->getSubscriberParams($subscriber);
+        }, $subscribers['subscribers']);
 
         $request = new Request('subscribers');
         $request->setParams($params);
@@ -282,7 +282,7 @@ class Subscriber extends Api
     public function deleteMultiple(array $subscribers)
     {
         $request = new Request('subscribers');
-        $request->setParams($subscribers);
+        $request->setParams(['subscribers' => $subscribers]);
 
         $response = $this->client->delete($request);
 
