@@ -39,8 +39,11 @@ class Client extends AbstractClient
         $logData = $this->makeLogData($request);
         $logData['method'] = $method;
 
-        $this->logger->info(json_encode($logData));
-
+        if ($this->logger) {
+            $this->logger->info(json_encode($logData));
+        } else {
+            info(json_encode($logData));
+        }
         return new Response(200, ['success' => true]);
     }
 
