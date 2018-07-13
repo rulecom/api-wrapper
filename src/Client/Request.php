@@ -186,7 +186,7 @@ class Request
     {
         $url = $this->getResourceUrl($this->resource, $this->idParam);
 
-        if (count($this->subresources)) {
+        if ($this->subresources && count($this->subresources)) {
             foreach($this->subresources as $subresource) {
                 if ($subresource['name']) {
                     $url .= $this->getResourceUrl($subresource['name'], $subresource['id']);
