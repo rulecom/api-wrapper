@@ -305,7 +305,7 @@ class Subscriber extends Api
             'filename' => $filename,
             'mappings' => $mappings,
             'tags' => $tags,
-            'overrideSuppresses' => $overrideSuppresses
+            'override_suppresses' => $overrideSuppresses
         ];
 
         $request = new Request('import');
