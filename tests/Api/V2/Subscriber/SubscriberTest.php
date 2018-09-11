@@ -31,12 +31,13 @@ class SubscriberTest extends ApiTestCase
         $response = $api->createMultiple([
             'subscribers' => [
                 ['email' => 'testerson1@email.com'],
-                ['phone_number' => '1234567890']
+                ['phone_number' => '1234567890'],
+                ['phone_number' => '0123456789']
             ],
             'tags' => ['tests']
         ]);
 
-        $this->assertEquals($response['message'], 'success');
+        $this->assertTrue($response['success']);
     }
 
     public function testGetListOfSubsribers()

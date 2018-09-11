@@ -295,14 +295,17 @@ class Subscriber extends Api
      * @param string $filename Name of the file stored on s3
      * @param array $mappings Mappings for the columns
      * @param array $tags Tags to import to
+     * @param bool $overrideSuppressions
      * @return array Response data
+     * @throws \Rule\ApiWrapper\Api\Exception\ResponseErrorException
      */
-    public function import($filename, array $mappings, array $tags)
+    public function import($filename, array $mappings, array $tags, bool $overrideSuppressions = false)
     {
         $params = [
             'filename' => $filename,
             'mappings' => $mappings,
-            'tags' => $tags
+            'tags' => $tags,
+            'override_suppressions' => $overrideSuppressions
         ];
 
         $request = new Request('import');

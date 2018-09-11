@@ -1,6 +1,6 @@
 <?php namespace tests\Rule\ApiWrapper\Api;
 
-use phpunit\framework\TestCase;
+use PHPUnit\Framework\TestCase;
 use Rule\ApiWrapper\Guzzle\Client;
 
 class ApiTestCase extends TestCase
