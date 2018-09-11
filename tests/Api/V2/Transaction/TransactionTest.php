@@ -31,12 +31,14 @@ class TransactionTest extends ApiTestCase
     public function testSendTextMessage()
     {
         $api = $this->getApi();
+
         $response = $api->send([
             'transaction_type' => 'text_message',
             'from' => ['name' => 'RULE Tester'],
-            'to' => ['phone_number' => '12345678'],
+            'to' => ['phone_number' => '0123456789'],
             'content' => "test message"
         ]);
+
 
         $this->assertArrayHasKey('transaction_id', $response);
     }

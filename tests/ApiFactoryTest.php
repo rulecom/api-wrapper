@@ -1,6 +1,6 @@
 <?php namespace tests\Rule\ApiWrapper;
 
-use phpunit\framework\TestCase;
+use PHPUnit\Framework\TestCase;
 use Rule\ApiWrapper\ApiFactory;
 
 use Rule\ApiWrapper\Api\Api;
