@@ -36,18 +36,17 @@ class Suppression extends Api
      *
      * @link https://rule.se/apidoc/#suppressions-suppressions-post
      *
-     * @param array $suppression
+     * @param array $suppressions
+     * @param array $suppressOn
      * @return array
      * @throws \Exception
      */
-    public function create(array $suppressions)
+    public function create(array $suppressions, array $suppressOn = null)
     {
-        foreach ($suppressions as $suppression) {
-            $this->assertValidSuppression($suppression);
-        }
+        $this->assertValidSuppression($suppressOn);
 
         $request = new Request('suppressions');
-        $request->setParams(['subscribers' => $suppressions]);
+        $request->setParams(['subscribers' => $suppressions, 'suppress_on' => $suppressOn]);
 
         $response = $this->client->post($request);
 
@@ -58,22 +57,20 @@ class Suppression extends Api
 
     /**
      * Check if Suppression data is valid
-     * 
-     * @param array $suppression
+     *
+     * @param array $suppressOn
      */
-    private function assertValidSuppression(array $suppression)
+    private function assertValidSuppression(array $suppressOn)
     {
-        if (isset($suppression['suppress_on'])) {
-            if(isset($suppression['suppress_on']['campaign']))
-                $this->assertValidCampaign($suppression['suppress_on']['campaign']);
-            if(isset($suppression['suppress_on']['transaction']))
-                $this->assertValidTransaction($suppression['suppress_on']['transaction']);
-        }
+        if(isset($suppressOn['campaign']))
+            $this->assertValidCampaign($suppressOn['campaign']);
+        if(isset($suppressOn['transaction']))
+            $this->assertValidTransaction($suppressOn['transaction']);
     }
 
     /**
      * Check if campaign is not empty
-     * 
+     *
      * @param $campaign
      */
     private function assertValidCampaign($campaign)
@@ -85,7 +82,7 @@ class Suppression extends Api
 
     /**
      * Check is transaction is not empty
-     * 
+     *
      * @param $transaction
      */
     private function assertValidTransaction($transaction)
@@ -97,7 +94,7 @@ class Suppression extends Api
 
     /**
      * Check if limit is valid
-     * 
+     *
      * @param $limit
      */
     private function assertValidLimit($limit)
