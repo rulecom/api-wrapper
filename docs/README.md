@@ -27,17 +27,30 @@
     * [post](#post)
     * [put](#put)
     * [delete](#delete)
-* [Customization](#customization)
+* [Client](#client-1)
     * [__construct](#__construct-3)
+    * [getApiKey](#getapikey-1)
+    * [getVersion](#getversion-1)
+    * [getBaseUrl](#getbaseurl-1)
+    * [setApiKey](#setapikey-1)
+    * [setVersion](#setversion-1)
+    * [setBaseUrl](#setbaseurl-1)
+    * [get](#get-2)
+    * [post](#post-1)
+    * [put](#put-1)
+    * [delete](#delete-1)
+    * [setLogger](#setlogger)
+* [Customization](#customization)
+    * [__construct](#__construct-4)
     * [getClient](#getclient-2)
     * [create](#create)
     * [getList](#getlist-1)
-    * [get](#get-2)
+    * [get](#get-3)
 * [InvalidResourceException](#invalidresourceexception)
 * [LaravelServiceProvider](#laravelserviceprovider)
     * [register](#register)
 * [Request](#request)
-    * [__construct](#__construct-4)
+    * [__construct](#__construct-5)
     * [setQuery](#setquery)
     * [getQuery](#getquery)
     * [setIdParam](#setidparam)
@@ -55,45 +68,45 @@
 * [RequestFactory](#requestfactory)
     * [make](#make-1)
 * [Response](#response)
-    * [__construct](#__construct-5)
+    * [__construct](#__construct-6)
     * [getStatusCode](#getstatuscode)
     * [getData](#getdata)
 * [ResponseErrorException](#responseerrorexception)
 * [ResponseFactory](#responsefactory)
     * [make](#make-2)
 * [Subscriber](#subscriber)
-    * [__construct](#__construct-6)
+    * [__construct](#__construct-7)
     * [getClient](#getclient-3)
     * [create](#create-1)
     * [createMultiple](#createmultiple)
     * [getList](#getlist-2)
-    * [get](#get-3)
+    * [get](#get-4)
     * [getFields](#getfields)
     * [update](#update)
     * [addTags](#addtags)
     * [getTags](#gettags)
     * [deleteTag](#deletetag)
-    * [delete](#delete-1)
+    * [delete](#delete-2)
     * [deleteMultiple](#deletemultiple)
     * [import](#import)
 * [Suppression](#suppression)
-    * [__construct](#__construct-7)
+    * [__construct](#__construct-8)
     * [getClient](#getclient-4)
     * [getList](#getlist-3)
     * [create](#create-2)
 * [Tag](#tag)
-    * [__construct](#__construct-8)
+    * [__construct](#__construct-9)
     * [getClient](#getclient-5)
     * [getList](#getlist-4)
-    * [delete](#delete-2)
+    * [delete](#delete-3)
     * [clear](#clear)
 * [Template](#template)
-    * [__construct](#__construct-9)
+    * [__construct](#__construct-10)
     * [getClient](#getclient-6)
     * [getList](#getlist-5)
-    * [get](#get-4)
+    * [get](#get-5)
 * [Transaction](#transaction)
-    * [__construct](#__construct-10)
+    * [__construct](#__construct-11)
     * [getClient](#getclient-7)
     * [send](#send-1)
 
@@ -592,6 +605,264 @@ Client::delete( \Rule\ApiWrapper\Client\Request $request ): \Rule\ApiWrapper\Cli
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `$request` | **\Rule\ApiWrapper\Client\Request** | Request instance |
+
+
+
+
+---
+
+## Client
+
+
+
+
+
+* Full name: \Rule\APIWrapper\Logger\Client
+* Parent class: \Rule\ApiWrapper\Client\Client
+
+
+### __construct
+
+Client constructor.
+
+```php
+Client::__construct(  $apiKey, string $version = &#039;v2&#039;, string $baseUrl = &quot;http://app.rule.io/api/&quot; )
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$apiKey` | **** |  |
+| `$version` | **string** |  |
+| `$baseUrl` | **string** |  |
+
+
+
+
+---
+
+### getApiKey
+
+Get Rule api key
+
+```php
+Client::getApiKey(  ): string
+```
+
+
+
+
+
+
+
+---
+
+### getVersion
+
+Get Rule api version
+
+```php
+Client::getVersion(  ): string
+```
+
+
+
+
+
+
+
+---
+
+### getBaseUrl
+
+Get base Rule url
+
+```php
+Client::getBaseUrl(  ): string
+```
+
+
+
+
+
+
+
+---
+
+### setApiKey
+
+
+
+```php
+Client::setApiKey(  $key )
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$key` | **** |  |
+
+
+
+
+---
+
+### setVersion
+
+
+
+```php
+Client::setVersion(  $version )
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$version` | **** |  |
+
+
+
+
+---
+
+### setBaseUrl
+
+
+
+```php
+Client::setBaseUrl(  $baseUrl )
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$baseUrl` | **** |  |
+
+
+
+
+---
+
+### get
+
+Make get request to api
+
+```php
+Client::get( \Rule\ApiWrapper\Client\Request $request ): \Rule\ApiWrapper\Client\Response
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$request` | **\Rule\ApiWrapper\Client\Request** | Request instance |
+
+
+
+
+---
+
+### post
+
+Make post request to api
+
+```php
+Client::post( \Rule\ApiWrapper\Client\Request $request ): \Rule\ApiWrapper\Client\Response
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$request` | **\Rule\ApiWrapper\Client\Request** | Request instance |
+
+
+
+
+---
+
+### put
+
+Make put request to api
+
+```php
+Client::put( \Rule\ApiWrapper\Client\Request $request ): \Rule\ApiWrapper\Client\Response
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$request` | **\Rule\ApiWrapper\Client\Request** | Request instance |
+
+
+
+
+---
+
+### delete
+
+Make delete request to api
+
+```php
+Client::delete( \Rule\ApiWrapper\Client\Request $request ): \Rule\ApiWrapper\Client\Response
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$request` | **\Rule\ApiWrapper\Client\Request** | Request instance |
+
+
+
+
+---
+
+### setLogger
+
+
+
+```php
+Client::setLogger(  $logger )
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$logger` | **** |  |
 
 
 
@@ -1536,7 +1807,7 @@ Subscriber::deleteMultiple( array $subscribers ): array
 
 
 ```php
-Subscriber::import( string $filename, array $mappings, array $tags ): array
+Subscriber::import( string $filename, array $mappings, array $tags, boolean $overrideSuppressions = false ): array
 ```
 
 
@@ -1549,6 +1820,7 @@ Subscriber::import( string $filename, array $mappings, array $tags ): array
 | `$filename` | **string** | Name of the file stored on s3 |
 | `$mappings` | **array** | Mappings for the columns |
 | `$tags` | **array** | Tags to import to |
+| `$overrideSuppressions` | **boolean** |  |
 
 
 **Return Value:**
@@ -1637,7 +1909,7 @@ Suppression::getList( integer $limit = 100 ): array
 Creates new Suppression
 
 ```php
-Suppression::create( array $suppressions ): array
+Suppression::create( array $suppressions, array $suppressOn = null ): array
 ```
 
 
@@ -1648,6 +1920,7 @@ Suppression::create( array $suppressions ): array
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `$suppressions` | **array** |  |
+| `$suppressOn` | **array** |  |
 
 
 
@@ -1948,4 +2221,4 @@ Transaction::send( array $transaction ): array
 
 
 --------
-> This document was automatically generated from source code comments on 2017-07-17 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)
+> This document was automatically generated from source code comments on 2020-02-13 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)
