@@ -31,7 +31,7 @@ abstract class Client
     public function __construct(
         $apiKey,
         $version = 'v2',
-        $baseUrl = "http://app.rule.io/api/")
+        $baseUrl = "https://app.rule.io/api/")
     {
         $this->apiKey = $apiKey;
         $this->version = $version;
@@ -40,7 +40,7 @@ abstract class Client
 
     /**
      * Get Rule api key
-     * 
+     *
      * @return string
      */
     public function getApiKey()
@@ -50,7 +50,7 @@ abstract class Client
 
     /**
      * Get Rule api version
-     * 
+     *
      * @return string
      */
     public function getVersion()
