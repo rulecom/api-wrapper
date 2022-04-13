@@ -28,7 +28,7 @@ class Client extends AbstractClient
     public function __construct(
         $apiKey,
         $version = 'v2',
-        $baseUrl = "http://app.rule.io/api/")
+        $baseUrl = "https://app.rule.io/api/")
     {
         parent::__construct($apiKey, $version, $baseUrl);
 
@@ -102,7 +102,7 @@ class Client extends AbstractClient
 
     /**
      * Returns request options
-     * 
+     *
      * @param Request $request
      * @return array
      */
