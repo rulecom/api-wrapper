@@ -1,5 +1,5 @@
 <?php
-namespace Rule\APIWrapper\Logger;
+namespace Rule\ApiWrapper\Logger;
 
 use Rule\ApiWrapper\Client\Client as AbstractClient;
 use Rule\ApiWrapper\Client\Request;
