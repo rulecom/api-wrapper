@@ -617,7 +617,7 @@ Client::delete( \Rule\ApiWrapper\Client\Request $request ): \Rule\ApiWrapper\Cli
 
 
 
-* Full name: \Rule\APIWrapper\Logger\Client
+* Full name: \Rule\ApiWrapper\Logger\Client
 * Parent class: \Rule\ApiWrapper\Client\Client
 
 
