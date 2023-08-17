@@ -94,6 +94,7 @@
     * [getClient](#getclient-4)
     * [getList](#getlist-3)
     * [create](#create-2)
+    * [delete](#delete-3)
 * [Tag](#tag)
     * [__construct](#__construct-9)
     * [getClient](#getclient-5)
@@ -1927,6 +1928,34 @@ Suppression::create( array $suppressions, array $suppressOn = null ): array
 **See Also:**
 
 * https://rule.se/apidoc/#suppressions-suppressions-post 
+
+---
+
+### delete
+
+Delete suppression Suppression
+
+```php
+Suppression::delete(string $identifier, string $identifiedBy = 'email', ?string $dispatcherType = null, ?string $messageType = null): array
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type             | Description                               |
+|-----------|------------------|-------------------------------------------|
+| `$identifier` | **string**       | Required                                  |
+| `$identifiedBy` | **string**       | email / phone_number / id. Default: email |
+| `$dispatcherType` | **string\|null** | campaign / transaction                    |
+| `$messageType` | **string\|null** | email / text_message                      |
+
+
+
+**See Also:**
+
+* https://apidoc.rule.se/#suppressions-delete-suppression-delete
 
 ---
 
